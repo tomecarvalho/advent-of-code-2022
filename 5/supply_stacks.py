@@ -57,8 +57,8 @@ def solve():
         def stacks_on_top_str(stacks):
             return "".join(stack[-1][1] if stack else " " for stack in stacks)
 
-        for i, stacks in enumerate((stacks_1, stacks_2)):
-            print(f"Solution #{i+1}: {stacks_on_top_str(stacks)}")
+        for i, stacks in enumerate((stacks_1, stacks_2), 1):
+            print(f"Solution #{i}: {stacks_on_top_str(stacks)}")
 
 
 solve()

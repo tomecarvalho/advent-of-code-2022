@@ -2,13 +2,17 @@ def unique(lst):
     return len(set(lst)) == len(lst)
 
 
-def solve_1():
+def find_1st_n_distinct_chars(data, n):
+    for i in range(len(data) - n + 1):
+        if unique(data[i:i + n]):
+            return i + n
+
+
+def solve():
     with open("input.txt", "r") as f:
         data = f.read()
-        for i in range(len(data) - 3):
-            chars = data[i:i + 4]
-            if unique(chars):
-                return i + 4
+        for i, n in enumerate((4, 14), 1):
+            print(f"Solution #{i}: {find_1st_n_distinct_chars(data, n)}")
 
 
-print(f"Solution #1: {solve_1()}")
+solve()
