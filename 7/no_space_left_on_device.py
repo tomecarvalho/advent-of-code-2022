@@ -1,4 +1,6 @@
-SIZE_THRESHOLD = 100000
+SIZE_THRESHOLD = 1e5
+TOTAL_DISK_SPACE = 7e7
+SPACE_REQUIRED = 3e7
 
 dirs = {}
 cur_dir = None
@@ -104,10 +106,16 @@ def populate_dirs():
 
 def solve():
     populate_dirs()
-    dir_size(list(dirs.values())[0])
-    sum_sizes = sum(size for size in dir_sizes.values()
-                    if size <= SIZE_THRESHOLD)
+    root_size = dir_size(dirs["/"])
+    sizes = dir_sizes.values()
+    sum_sizes = sum(size for size in sizes if size <= SIZE_THRESHOLD)
     print(f"Solution #1: {sum_sizes}")
+    space_available = TOTAL_DISK_SPACE - root_size
+    space_needed = SPACE_REQUIRED - space_available
+    smallest_big_enough_size = next(
+        (size for size in sorted(sizes) if size >= space_needed)
+    )
+    print(f"Solution #2: {smallest_big_enough_size}")
 
 
 solve()
